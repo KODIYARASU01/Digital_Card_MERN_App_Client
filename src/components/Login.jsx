@@ -1,21 +1,26 @@
 import "./styles/User.scss";
 import { Link, useNavigate } from "react-router-dom";
-import avator from "../assets/profile.png";
+import avator from "../assets/LOGO.png";
 import company from "../assets/aristostech.jpg";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import svg from "../assets/svg/6.svg";
+import Loader from "../components/Loader.jsx";
 
 export default function Login() {
   let navigate = useNavigate();
 
   let [userName, setUserName] = useState();
   let [password, setpassword] = useState();
+  let [loader, setLoader] = useState(false);
 
   let handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       let data = { userName, password };
+      setLoader(true);
       let result = await axios.post(
         "https://digital-card-mern-app-server.onrender.com/api/login",
         data
@@ -26,37 +31,40 @@ export default function Login() {
       console.log(token);
       // Store the token in local storage
       localStorage.setItem("token", token);
-      alert("User Login Sucessfully");
       navigate("/admin");
       setUserName("");
       setpassword("");
+      setLoader(false);
     } catch (error) {
       console.log("User not login" + error.message);
-
+      setLoader(false);
       navigate("/");
     }
   };
 
   return (
     <div className="user_container">
+      {loader ? <Loader /> : " "}
+      <div className="svg">
+        <img src={svg} alt="svg" />
+      </div>
       <div className="user_header">
         <h3 className="text-center">Welcome to Digital Card Creator!</h3>
         <p className="text-center">
           Brand your store easily,share this digital card with anyone to
           showcase your company profile easier.
         </p>
+        <img src="" alt="" />
       </div>
       <div className="user_box">
         <div className="box_title">
-          <h1>Hello , User</h1>
-          <p className="text-center text-sm">Enter your account Username</p>
+          <p className="text-center text-sm">Login</p>
+          <div className="login-profile flex justify-center p-4">
+            <img src={avator} alt="avatar" />
+          </div>
         </div>
 
         <form action="" onSubmit={handleLogin}>
-          <div className="profile flex justify-center p-4">
-            <img src={avator} alt="avatar" />
-          </div>
-
           <div className="form_group">
             <input
               type="text"

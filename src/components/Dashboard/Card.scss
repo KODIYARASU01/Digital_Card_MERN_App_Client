@@ -60,6 +60,7 @@
       margin: auto;
       min-width: 60% !important;
       max-width: 50% !important;
+
       height: auto;
 
       background-color: rgb(255, 255, 255);
@@ -711,7 +712,7 @@
       }
 
       .gallery {
-        width: 100%;
+        width: 100% !important;
         padding: 10px;
         padding-bottom: 3rem;
         border-radius: 10px;

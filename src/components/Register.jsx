@@ -89,8 +89,8 @@ export default function Register() {
           </Link>
         </div>
         <div className="box_title">
-          <h1>Register</h1>
-          <p className="text-center text-sm">
+          <h1 className="register_title">Register</h1>
+          <p className="text-center text-sm reg">
             Create your new Digital Card Account
           </p>
         </div>

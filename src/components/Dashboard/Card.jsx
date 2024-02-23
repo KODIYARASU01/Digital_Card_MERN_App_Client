@@ -13,6 +13,8 @@ const Card = ({ serviceMessage, value, setServiceMessage, setValue }) => {
   const [aboutData, setAboutData] = useState(null);
   const [serviceData, setServiceData] = useState(null);
   const [paymentData, setPaymentData] = useState(null);
+  const [gallerData, setGalleryData] = useState(null);
+
   const [error, setError] = useState(null);
   console.log(userData);
   console.log(aboutData);
@@ -129,6 +131,31 @@ const Card = ({ serviceMessage, value, setServiceMessage, setValue }) => {
     };
 
     fetchPaymentData();
+  }, []);
+  //Payment data fetch
+  useEffect(() => {
+    // Fetch user data
+    const fetchGalleryData = async () => {
+      try {
+        // Retrieve token from local storage or wherever it's stored
+        const token = localStorage.getItem("token");
+
+        // Make authenticated request with bearer token
+        const response = await axios.get("http://localhost:3001/upload", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Set user data
+        setGalleryData(response.data);
+      } catch (error) {
+        // Handle errors
+        setError(error.response.data.error);
+      }
+    };
+
+    fetchGalleryData();
   }, []);
   if (error) {
     return <div>Error: {error}</div>;
@@ -521,9 +548,7 @@ const Card = ({ serviceMessage, value, setServiceMessage, setValue }) => {
               </div>
 
               <div className="gallery_container">
-                {gallerys.map((pick, index) => {
-                  return <img key={index} src={pick} alt="gallery pick" />;
-                })}
+                <img src={pic1} alt="gallery pick" />;
               </div>
             </div>
             {/* //Feedback page*/}
