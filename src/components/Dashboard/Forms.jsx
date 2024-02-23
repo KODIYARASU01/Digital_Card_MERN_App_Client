@@ -65,7 +65,7 @@ const Forms = () => {
 
   //Gallery :
 
-  let [gallery, setGallery] = useState([]);
+  let [gallery, setGallery] = useState();
 
   //Show & Hide Profile:
   //   let [show, setShow] = useState(true);
